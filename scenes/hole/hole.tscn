@@ -1,0 +1,101 @@
+[gd_scene load_steps=12 format=3 uid="uid://bu1cd33fs62n4"]
+
+[ext_resource type="Script" path="res://scenes/hole/hole.gd" id="1_s35kx"]
+[ext_resource type="Shader" path="res://scenes/hole/hole.gdshader" id="2_jod5q"]
+[ext_resource type="Texture2D" uid="uid://dkth4p7m2m35q" path="res://icon.svg" id="3_wgk0g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7644r"]
+radius = 129.062
+
+[sub_resource type="Animation" id="Animation_eucyx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_xudf2"]
+resource_name = "def"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xbdsn"]
+_data = {
+"RESET": SubResource("Animation_eucyx"),
+"def": SubResource("Animation_xudf2")
+}
+
+[sub_resource type="Curve" id="Curve_uey2j"]
+min_value = -1.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0978261, 0.454545), 0.321353, 0.267449, 0, 0, Vector2(0.224638, -0.6), 0.0, 0.0, 0, 0, Vector2(0.355072, 0.436364), 0.0, -1.49236, 0, 0, Vector2(0.416667, 0.2), -2.50909, -2.50909, 0, 0, Vector2(0.519737, 0.00227273), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_vit0y"]
+curve = SubResource("Curve_uey2j")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3hfmr"]
+shader = ExtResource("2_jod5q")
+shader_parameter/strength = 0.2
+shader_parameter/curve = SubResource("CurveTexture_vit0y")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cyfew"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 14
+
+[node name="hole" type="Area2D"]
+position = Vector2(0, 1)
+gravity_space_override = 2
+gravity_point = true
+gravity = 4096.0
+script = ExtResource("1_s35kx")
+
+[node name="event_horizon" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7644r")
+metadata/_edit_lock_ = true
+
+[node name="animation" type="AnimationPlayer" parent="."]
+root_node = NodePath("")
+libraries = {
+"": SubResource("AnimationLibrary_xbdsn")
+}
+
+[node name="distortion" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3hfmr")
+scale = Vector2(2, 2)
+texture = ExtResource("3_wgk0g")
+
+[node name="buffer" type="BackBufferCopy" parent="distortion"]
+position = Vector2(-205.7, -122.207)
+scale = Vector2(0.156189, 0.154497)
+copy_mode = 2
+
+[node name="center" type="Panel" parent="distortion"]
+offset_left = -6.5
+offset_top = -7.0
+offset_right = 6.5
+offset_bottom = 6.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_cyfew")

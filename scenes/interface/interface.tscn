@@ -1,0 +1,466 @@
+[gd_scene load_steps=18 format=3 uid="uid://bt5clj0ymx163"]
+
+[ext_resource type="Script" path="res://scenes/interface/interface.gd" id="1_r66dv"]
+[ext_resource type="Texture2D" uid="uid://bmba20gomybnf" path="res://scenes/interface/arrow.png" id="2_8c5ya"]
+[ext_resource type="Shader" path="res://scenes/interface/transition.gdshader" id="3_v48yo"]
+[ext_resource type="FontFile" uid="uid://dov3qw60s7m7f" path="res://space.ttf" id="5_b4k54"]
+[ext_resource type="FontFile" uid="uid://bycmh8sj0sklq" path="res://neon.ttf" id="6_6bw78"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e6n4v"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 14
+
+[sub_resource type="Animation" id="Animation_c4edn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ui/right:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ui/bottom:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ui/up:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ui/left:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ui/right:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ui/background:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ui/bottom:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ui/up:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("ui/left:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_x8ev6"]
+resource_name = "def"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ui/right:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.14159]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ui/bottom:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.5708, 4.71239]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ui/up:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.5708, 4.71239]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ui/left:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.14159]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ui/right:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ui/background:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ui/bottom:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ui/up:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("ui/left:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dl1x2"]
+_data = {
+"RESET": SubResource("Animation_c4edn"),
+"def": SubResource("Animation_x8ev6")
+}
+
+[sub_resource type="Animation" id="Animation_2b8e0"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_yr0yl"]
+resource_name = "def"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ui:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ui:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(120, -0.25, 0, 0.25, 0, 0, -0.292105, -175.23, 0.0306169, 18.3667, 0, -0.0166667, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.9, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dfn0p"]
+_data = {
+"RESET": SubResource("Animation_2b8e0"),
+"def": SubResource("Animation_yr0yl")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7hpr2"]
+shader = ExtResource("3_v48yo")
+shader_parameter/saw_b_shift = -0.267
+shader_parameter/saw_a_interval = 1.0
+shader_parameter/saw_b_interval = 2.0
+shader_parameter/saw_a_scale = 1.0
+shader_parameter/saw_b_scale = 0.821
+shader_parameter/uv_scale = Vector2(3, 8)
+shader_parameter/color = Vector4(0, 0, 0, 1)
+shader_parameter/right = 1.2
+shader_parameter/left = 1.2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_180v5"]
+bg_color = Color(0, 0, 0, 0.7)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1ptb"]
+bg_color = Color(0.12549, 0.12549, 0.12549, 0.980392)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mbmqp"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="Theme" id="Theme_omgoc"]
+default_font = ExtResource("6_6bw78")
+default_font_size = 25
+Panel/styles/panel = SubResource("StyleBoxFlat_180v5")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_o1ptb")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_mbmqp")
+
+[node name="interface" type="CanvasLayer"]
+script = ExtResource("1_r66dv")
+
+[node name="condition_holes" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -110.0
+offset_right = 110.0
+offset_bottom = -10.0
+grow_vertical = 0
+
+[node name="ui" type="Control" parent="condition_holes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 120.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="background" type="Panel" parent="condition_holes/ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(50, 50)
+theme_override_styles/panel = SubResource("StyleBoxFlat_e6n4v")
+
+[node name="up" type="Sprite2D" parent="condition_holes/ui"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(50, 22)
+rotation = 1.5708
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("2_8c5ya")
+flip_h = true
+
+[node name="bottom" type="Sprite2D" parent="condition_holes/ui"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(50, 78)
+rotation = 1.5708
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("2_8c5ya")
+
+[node name="left" type="Sprite2D" parent="condition_holes/ui"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(22, 50)
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("2_8c5ya")
+flip_h = true
+
+[node name="right" type="Sprite2D" parent="condition_holes/ui"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(78, 50)
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("2_8c5ya")
+
+[node name="reset_condition" type="AnimationPlayer" parent="condition_holes"]
+libraries = {
+"": SubResource("AnimationLibrary_dl1x2")
+}
+
+[node name="start" type="AnimationPlayer" parent="condition_holes"]
+autoplay = "def"
+libraries = {
+"": SubResource("AnimationLibrary_dfn0p")
+}
+
+[node name="transition" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_7hpr2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="win_label" type="Label" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 140.0
+offset_top = 12.0
+offset_right = -72.0
+offset_bottom = 446.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_b4k54")
+theme_override_font_sizes/font_size = 400
+text = "W i n"
+
+[node name="ui_button" type="TextureButton" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="management" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 48.0
+offset_top = 10.0
+offset_right = 524.0
+offset_bottom = 88.0
+grow_horizontal = 0
+theme = SubResource("Theme_omgoc")
+
+[node name="wait_bar" type="ProgressBar" parent="management"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 5.84
+show_percentage = false
+
+[node name="text" type="Label" parent="management"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Сделано специально
+для этого геймджема"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="jam_link" type="TextureButton" parent="management"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+
+[connection signal="pressed" from="management/jam_link" to="." method="jam_link_pressed"]

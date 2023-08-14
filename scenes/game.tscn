@@ -1,0 +1,216 @@
+[gd_scene load_steps=13 format=3 uid="uid://c5ru6ymb4expx"]
+
+[ext_resource type="Texture2D" uid="uid://cuqdltaiy2hjk" path="res://background.png" id="1_2jjgq"]
+[ext_resource type="PackedScene" uid="uid://bu1cd33fs62n4" path="res://scenes/hole/hole.tscn" id="1_nw03q"]
+[ext_resource type="Script" path="res://scenes/player/camera.gd" id="2_8mqu0"]
+[ext_resource type="Texture2D" uid="uid://v8673rmap3dn" path="res://scenes/player/planet.png" id="3_aipmc"]
+[ext_resource type="PackedScene" uid="uid://bt5clj0ymx163" path="res://scenes/interface/interface.tscn" id="3_wsc7b"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="4_3j48l"]
+[ext_resource type="Shader" path="res://scenes/interface/transition.gdshader" id="7_3l3uq"]
+[ext_resource type="FontFile" uid="uid://dov3qw60s7m7f" path="res://space.ttf" id="8_hyb0o"]
+
+[sub_resource type="Shader" id="Shader_jek7e"]
+code = "shader_type canvas_item;
+
+void fragment() {
+	vec2 iResolution = 1.0 / SCREEN_PIXEL_SIZE;
+	vec2 uv = (FRAGCOORD.xy / iResolution.xy) - .5;
+	float t = TIME * .1 + ((.25 + .05 * sin(TIME * .1))/(length(uv.xy) + .07)) * 2.2;
+	float si = sin(t);
+	float co = cos(t);
+	mat2 ma = mat2(vec2(co, si), vec2(-si, co));
+
+	float v1, v2, v3;
+	v1 = v2 = v3 = 0.0;
+	
+	float s = 0.0;
+	for (int i = 0; i < 90; i++)
+	{
+		vec3 p = s * vec3(uv, 0.0);
+		p.xy *= ma;
+		p += vec3(.22, .3, s - 1.5 - sin(TIME * .13) * .1);
+		for (int i = 0; i < 8; i++)	p = abs(p) / dot(p,p) - 0.659;
+		v1 += dot(p,p) * .0015 * (1.8 + sin(length(uv.xy * 13.0) + .5  - TIME * .2));
+		v2 += dot(p,p) * .0013 * (1.5 + sin(length(uv.xy * 14.5) + 1.2 - TIME * .3));
+		v3 += length(p.xy*10.) * .0003;
+		s  += .035;
+	}
+	
+	float len = length(uv);
+	v1 *= smoothstep(.7, .0, len);
+	v2 *= smoothstep(.5, .0, len);
+	v3 *= smoothstep(.9, .0, len);
+	
+	vec3 col = vec3( v3 * (1.5 + sin(TIME * .2) * .4),
+					(v1 + v3) * .3,
+					 v2) + smoothstep(0.2, .0, len) * .85 + smoothstep(.0, .6, v3) * .3;
+
+	COLOR=vec4(min(pow(abs(col), vec3(1.2)), 1.0), 1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fq78a"]
+shader = SubResource("Shader_jek7e")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k248o"]
+radius = 63.0079
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_12q2w"]
+shader = ExtResource("7_3l3uq")
+shader_parameter/saw_b_shift = -0.382
+shader_parameter/saw_a_interval = 0.935
+shader_parameter/saw_b_interval = 1.94
+shader_parameter/saw_a_scale = 0.365
+shader_parameter/saw_b_scale = 0.301
+shader_parameter/uv_scale = Vector2(3, 8)
+shader_parameter/color = Vector4(0, 0, 0, 1)
+shader_parameter/right = 11.065
+shader_parameter/left = 0.01
+
+[node name="main" type="Node2D"]
+metadata/_edit_vertical_guides_ = [2275.0]
+
+[node name="galaxy" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_fq78a")
+offset_left = -3019.0
+offset_top = -1883.0
+offset_right = 3090.0
+offset_bottom = 1902.0
+
+[node name="backgrounds" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+
+[node name="one" type="Sprite2D" parent="backgrounds"]
+position = Vector2(-797, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("1_2jjgq")
+
+[node name="two" type="Sprite2D" parent="backgrounds"]
+position = Vector2(1250, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("1_2jjgq")
+
+[node name="three" type="Sprite2D" parent="backgrounds"]
+position = Vector2(3298, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("1_2jjgq")
+
+[node name="four" type="Sprite2D" parent="backgrounds"]
+position = Vector2(5345, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("1_2jjgq")
+
+[node name="five" type="Sprite2D" parent="backgrounds"]
+position = Vector2(7393, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("1_2jjgq")
+
+[node name="camera" type="Camera2D" parent="." node_paths=PackedStringArray("select", "backgrounds")]
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 30.0
+script = ExtResource("2_8mqu0")
+select = NodePath("../player")
+backgrounds = NodePath("../backgrounds")
+
+[node name="interface" parent="camera" instance=ExtResource("3_wsc7b")]
+
+[node name="player" type="RigidBody2D" parent="."]
+position = Vector2(-711, -550)
+can_sleep = false
+lock_rotation = true
+freeze = true
+script = ExtResource("4_3j48l")
+
+[node name="collision" type="CollisionShape2D" parent="player"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_k248o")
+
+[node name="planet" type="Sprite2D" parent="player"]
+texture = ExtResource("3_aipmc")
+
+[node name="holes" type="Node2D" parent="."]
+
+[node name="group_one1" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(-598, 1)
+
+[node name="group_one2" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(-475, 96)
+
+[node name="group_one3" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(-333, 158)
+
+[node name="group_one4" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(-180, 169)
+
+[node name="group_one5" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(-118, 174)
+
+[node name="group_one6" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(-36, 149)
+
+[node name="group_two1" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(510, 4)
+
+[node name="group_three1" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(1795, 203)
+
+[node name="group_three2" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(1835, 218)
+
+[node name="group_three3" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(1898, 241)
+
+[node name="group_four1" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(2884, 50)
+
+[node name="group_five1" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(3617, 253)
+
+[node name="group_five2" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(3779, 285)
+
+[node name="group_five3" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(3945, 261)
+
+[node name="group_five4" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(4097, 184)
+
+[node name="group_six1" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(5182, -140)
+
+[node name="group_six2" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(5338, 106)
+
+[node name="group_six3" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(5757, 202)
+
+[node name="group_six4" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(5991, -20)
+
+[node name="group_six5" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(6129, 351)
+
+[node name="group_six6" parent="holes" instance=ExtResource("1_nw03q")]
+position = Vector2(6297, 231)
+
+[node name="win_zone" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_12q2w")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7786.0
+offset_top = -1006.0
+offset_right = 12437.0
+offset_bottom = 972.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="win_label" type="Label" parent="."]
+offset_left = 7865.0
+offset_top = -336.0
+offset_right = 8805.0
+offset_bottom = 97.9998
+rotation = -0.375159
+theme_override_fonts/font = ExtResource("8_hyb0o")
+theme_override_font_sizes/font_size = 400
+text = "W i n"
