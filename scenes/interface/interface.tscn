@@ -1,10 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://bt5clj0ymx163"]
+[gd_scene load_steps=20 format=3 uid="uid://bt5clj0ymx163"]
 
 [ext_resource type="Script" path="res://scenes/interface/interface.gd" id="1_r66dv"]
 [ext_resource type="Texture2D" uid="uid://bmba20gomybnf" path="res://scenes/interface/arrow.png" id="2_8c5ya"]
 [ext_resource type="Shader" path="res://scenes/interface/transition.gdshader" id="3_v48yo"]
 [ext_resource type="FontFile" uid="uid://dov3qw60s7m7f" path="res://space.ttf" id="5_b4k54"]
+[ext_resource type="AudioStream" uid="uid://b86vkaxqmydns" path="res://scenes/interface/holes_reset.wav" id="6_1mf8k"]
 [ext_resource type="FontFile" uid="uid://bycmh8sj0sklq" path="res://neon.ttf" id="6_6bw78"]
+[ext_resource type="AudioStream" uid="uid://dc32dkmmd8b78" path="res://scenes/interface/push.wav" id="6_cuisn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e6n4v"]
 bg_color = Color(1, 1, 1, 1)
@@ -266,7 +268,7 @@ tracks/1/path = NodePath("ui:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2),
+"handle_modes": PackedInt32Array(0, 0, 0),
 "points": PackedFloat32Array(120, -0.25, 0, 0.25, 0, 0, -0.292105, -175.23, 0.0306169, 18.3667, 0, -0.0166667, 0, 0, 0),
 "times": PackedFloat32Array(0, 0.9, 1)
 }
@@ -391,6 +393,7 @@ libraries = {
 }
 
 [node name="transition" type="ColorRect" parent="."]
+modulate = Color(0, 0, 0, 1)
 material = SubResource("ShaderMaterial_7hpr2")
 anchors_preset = 15
 anchor_right = 1.0
@@ -462,5 +465,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
+
+[node name="push" type="AudioStreamPlayer" parent="management"]
+stream = ExtResource("6_cuisn")
+volume_db = -10.0
+
+[node name="holes_reset" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_1mf8k")
+volume_db = -20.0
 
 [connection signal="pressed" from="management/jam_link" to="." method="jam_link_pressed"]
