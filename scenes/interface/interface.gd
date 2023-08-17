@@ -12,6 +12,15 @@ func _ready():
 	$management/text.text = "Сделано специально\nдля этого геймджема"
 	$management/jam_link.show()
 	
+	await push().finished
+	
+	$management.modulate.r = 1
+	$management.modulate.b = 0
+	$management/wait_bar.value = 0
+	$management/text.text = "Включить режим\nсовместимости"
+	$management/jam_link.hide()
+	$management/compatibility_mode.show()
+	
 	push()
 
 func push() -> Tween:
@@ -57,3 +66,7 @@ func set_shader_value(value: float):
 
 func jam_link_pressed():
 	OS.shell_open("https://itch.io/jam/how-about-make-game")
+
+
+func compatibility_mode_pressed():
+	Global.emit_signal("compatibility_mode")

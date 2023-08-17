@@ -1,11 +1,10 @@
-[gd_scene load_steps=137 format=3 uid="uid://c5ru6ymb4expx"]
+[gd_scene load_steps=136 format=3 uid="uid://c5ru6ymb4expx"]
 
 [ext_resource type="Texture2D" uid="uid://cuqdltaiy2hjk" path="res://background.png" id="1_2jjgq"]
 [ext_resource type="PackedScene" uid="uid://bu1cd33fs62n4" path="res://scenes/hole/hole.tscn" id="1_nw03q"]
 [ext_resource type="Script" path="res://scenes/player/camera.gd" id="2_8mqu0"]
 [ext_resource type="PackedScene" uid="uid://bt5clj0ymx163" path="res://scenes/interface/interface.tscn" id="3_wsc7b"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="4_3j48l"]
-[ext_resource type="Texture2D" uid="uid://rnd7biiy6syi" path="res://scenes/player/asteroid.png" id="5_foy8q"]
 [ext_resource type="Texture2D" uid="uid://catsseohm2w0x" path="res://scenes/player/planet_anim.png" id="6_03dgj"]
 [ext_resource type="Shader" path="res://scenes/interface/transition.gdshader" id="7_3l3uq"]
 [ext_resource type="FontFile" uid="uid://dov3qw60s7m7f" path="res://space.ttf" id="8_hyb0o"]
@@ -928,7 +927,7 @@ offset_right = 3090.0
 offset_bottom = 1902.0
 
 [node name="backgrounds" type="Node2D" parent="."]
-modulate = Color(1, 1, 1, 0)
+modulate = Color(0, 1, 1, 0)
 
 [node name="one" type="Sprite2D" parent="backgrounds"]
 position = Vector2(-797, 0)
@@ -978,18 +977,6 @@ script = ExtResource("4_3j48l")
 [node name="collision" type="CollisionShape2D" parent="player"]
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_k248o")
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="player"]
-amount = 30
-texture = ExtResource("5_foy8q")
-gravity = Vector2(0, 100)
-damping_min = 2.0
-damping_max = 2.0
-angle_min = -10.0
-angle_max = 10.0
-color = Color(0.309804, 0.603922, 0.701961, 1)
-hue_variation_min = -0.04
-hue_variation_max = 0.26
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
 sprite_frames = SubResource("SpriteFrames_e21q2")

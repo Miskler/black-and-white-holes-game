@@ -452,12 +452,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Сделано специально
-для этого геймджема"
+text = "Включить режим
+совместимости"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="jam_link" type="TextureButton" parent="management"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="compatibility_mode" type="TextureButton" parent="management"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -475,3 +486,4 @@ stream = ExtResource("6_1mf8k")
 volume_db = -20.0
 
 [connection signal="pressed" from="management/jam_link" to="." method="jam_link_pressed"]
+[connection signal="pressed" from="management/compatibility_mode" to="." method="compatibility_mode_pressed"]
